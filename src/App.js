@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import List from './components/groceries/List';
+import ItemForm from './components/groceries/ItemForm';
 
 
 class App extends Component {
@@ -14,11 +15,24 @@ class App extends Component {
     return items
   }
 
+  getUniqId = () => {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+
+  addItem = (incomingItem) => {
+    const { items } = this.state
+    const newItem = { id: this.getUniqId(), ...incomingItem }
+    this.setState({ items: [...items, newItem]})
+  }
+
   render() {
     return(
       <div>
         <header>S & B United</header>
         <ul>
+          <ItemForm addItem={this.addItem} />
           <List 
             items={this.visibleItems()}
           />  
