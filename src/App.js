@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
 import List from './components/groceries/List';
 import ItemForm from './components/groceries/ItemForm';
+import Footer from './components/groceries/Footer';
 
 
 class App extends Component {
   state = { items: [
-    { id: 1, itemName: 'Chips', price: 3, complete: true },
+    { id: 1, itemName: 'Chips', price: 3, complete: false },
     { id: 2, itemName: 'Monster', price: 5, complete: false},
     { id: 3, itemName: 'Soap', price: 2, complete: false},
-  ]}
+  ],
+    filter: 'All'
+  }
 
-  visibleItems = () => {
-    const { items } = this.state
-    return items
+  setFilter = (filter) => {
+    this.setState({ filter })
+  }
+
+   visibleItems = () => {
+    const { items, filter } = this.state
+    switch(filter) {
+      case 'Active':
+        return items.filter( i => !i.complete)
+      case 'Complete':
+        return items.filter( i => i.complete)
+      default: 
+        return items
+    }
   }
 
   getUniqId = () => {
@@ -45,11 +59,13 @@ class App extends Component {
 
 
   render() {
+    const { filter } = this.state
     return(
       <div>
         <header>S & B United</header>
         <ul>
           <ItemForm addItem={this.addItem} />
+          <Footer filter={filter} setFilter={this.setFilter} />
           <List 
             items={this.visibleItems()}
             updateComplete={this.updateComplete}
