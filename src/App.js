@@ -27,6 +27,10 @@ class App extends Component {
     this.setState({ items: [...items, newItem]})
   }
 
+  deleteItem = (id) => {
+    this.setState({ items: [...this.state.items.filter(item => item.id !== id)] });
+  }
+  
   updateComplete = (id) => {
     const { items } = this.state
     this.setState({
@@ -39,6 +43,7 @@ class App extends Component {
     })
   }
 
+
   render() {
     return(
       <div>
@@ -48,6 +53,7 @@ class App extends Component {
           <List 
             items={this.visibleItems()}
             updateComplete={this.updateComplete}
+            deleteItem={this.deleteItem}
           />  
         </ul>
       </div>
