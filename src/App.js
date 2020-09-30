@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import List from './components/groceries/List';
-import ItemForm from './components/groceries/ItemForm';
-import Footer from './components/groceries/Footer';
+import List from './components/groceries/groceries/List';
+import ItemForm from './components/groceries/groceries/ItemForm';
+import Footer from './components/groceries/groceries/Footer';
+import { Container, Header } from 'semantic-ui-react';
 
 
 class App extends Component {
@@ -60,18 +61,16 @@ class App extends Component {
   render() {
     const { filter } = this.state
     return(
-      <div>
-        <header>S & B United</header>
-        <ul>
+      <Container>
+        <Header>S & B United</Header>
           <ItemForm addItem={this.addItem} />
           <Footer filter={filter} setFilter={this.setFilter} />
           <List 
             items={this.visibleItems()}
             updateComplete={this.updateComplete}
             deleteItem={this.deleteItem}
-          />  
-        </ul>
-      </div>
+          />
+      </Container>
     )
   }
 }
