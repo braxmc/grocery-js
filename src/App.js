@@ -58,6 +58,18 @@ class App extends Component {
     })
   }
 
+  updateItem = (id, item) => {
+    const { items } = this.state
+    this.setState({
+      items: items.map( i => {
+        if (i.id === id) {
+          return item
+        }
+        return i
+      })
+    })
+  }
+
   render() {
     const { filter } = this.state
     return(
@@ -69,6 +81,7 @@ class App extends Component {
             items={this.visibleItems()}
             updateComplete={this.updateComplete}
             deleteItem={this.deleteItem}
+            updateItem={this.updateItem}
           />
       </Container>
     )

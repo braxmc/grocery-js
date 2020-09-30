@@ -19,11 +19,11 @@ class ItemForm extends Component {
   handleSubmit = (f) => {
     f.preventDefault()
     if (this.props.id) {
-      const { updateComplete, close } = this.props
-      updateComplete(this.state)
+      const { updateItem, close } = this.props
+      updateItem(this.props.id, this.state)
       close()
     } else {
-    this.props.addItem(this.state)
+      this.props.addItem(this.state)
     }
     this.setState({ itemName: '', price: 0, complete: false })
   }
@@ -39,7 +39,7 @@ class ItemForm extends Component {
           required
           placeholder='Item Name'
         />
-        <Form.Input 
+        <Form.Input
           name='price'
           value={price}
           onChange={this.handleChange}

@@ -9,12 +9,12 @@ class Item extends Component {
   close = () => this.setState({ editing: false })
 
   render() {
-    const { id, itemName, price, complete, updateComplete, deleteItem } = this.props
+    const { id, itemName, price, complete, updateComplete, deleteItem, updateItem } = this.props
     const { editing } = this.state
 
     return(
 
-        <div>
+        <>
             <Header
               style={ complete ? { ...styles.item, ...styles.complete } : styles.item }
               onClick={() => updateComplete(id)}
@@ -31,7 +31,7 @@ class Item extends Component {
             >
               <Modal.Content>
                 <ItemForm
-                  updateComplete={updateComplete}
+                  updateItem={updateItem}
                   close={this.close}
                   id={id}
                   itemName={itemName}
@@ -40,7 +40,7 @@ class Item extends Component {
                 />
               </Modal.Content>
             </Modal>
-        </div>
+        </>
       )
     }
   }
